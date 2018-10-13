@@ -9,11 +9,14 @@ CELLS = [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0),
          (0, 4), (1, 4), (2, 4), (3, 4), (4, 4)]
 
 
-
+# Samples 3 random tuples from the CELLS which become the location of monster door and player
 def get_locations():
     return random.sample(CELLS, 3)
 
-
+'''
+Receives the current location of the player and the move chosen by the player and returns the position
+of the player after making the move.
+'''
 def move_player(player, move):
     x, y = player
     if move == "LEFT":
@@ -26,12 +29,15 @@ def move_player(player, move):
         y += 1
     return x, y
 
-
+'''
+Receives the players current location and return what are the valid moves that the player can make
+in the given position.
+'''
 def get_moves(player):
     moves = ["LEFT", "RIGHT", "UP", "DOWN"]
     x, y = player
     if x == 0:
-        moves.remove("LEFT")
+        moves.remove("LEFT") # removes "LEFT" from the list
     if x == 4:
         moves.remove("RIGHT")
     if y == 0:
@@ -40,7 +46,18 @@ def get_moves(player):
         moves.remove("DOWN")
     return moves
 
+'''
+Function displays the positions of player,Door and moster in the form of a gird.
+eg:
+ _ _ _ _ _
+|_|_|_|_|_|
+|_|_|_|X|_|
+|_|_|_|_|_|
+|_|_|_|_|D|
+|_|_|_|_|_|
 
+Here X is the player abd D is the door to be reached.
+'''
 def draw_map(player, monster, door):
     print(" _"*5)
     tile = "|{}"
@@ -70,13 +87,16 @@ def draw_map(player, monster, door):
                 output = tile.format("_|")
         print(output, end=line_end)
 
+'''
+The main function which manages the entire game
+'''
 def game_loop():
     monster, door, player = get_locations()
     playing = True
     
     while playing:
-        draw_map(player, monster, door)
-        valid_moves = get_moves(player)
+        draw_map(player, monster, door) # draws the grid with player, monster and door
+        valid_moves = get_moves(player) # gets the valid moves for the given position
         
         print("You're currently in room {}".format(player))
         print("You can move {}".format(", ".join(valid_moves)))
@@ -85,11 +105,11 @@ def game_loop():
         move = input("> ")
         move = move.upper()
         
-        if move == 'QUIT':
+        if move == 'QUIT':   # break the loop if the player enters QUIT
             print("\n ** See you next time! **\n")
             break
         if move in valid_moves:
-            player = move_player(player, move)
+            player = move_player(player, move) #gives the new position of the player as per the move which was input by the player
             
             if player == monster:
                 print("\n ** Oh no! The monster got you! Better luck next time! **\n")
@@ -98,10 +118,10 @@ def game_loop():
                 print("\n ** You escaped! Congratulations! **\n")
                 playing = False
         else:
-            input("\n ** Walls are hard! Don't run into them! **\n")
+            input("\n ** Walls are hard! Don't run into them! **\n") # in case the move is not valid
     else:
         if input("Play again? [Y/n] ").lower() != "n":
-            game_loop()
+            game_loop()  #Restarts the game 
 
 
 
