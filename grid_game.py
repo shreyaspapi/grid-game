@@ -1,4 +1,6 @@
-
+'''
+Game in which player has to reach the door avoiding monsters
+'''
 import random
 
 
@@ -8,8 +10,9 @@ CELLS = [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0),
          (0, 3), (1, 3), (2, 3), (3, 3), (4, 3),
          (0, 4), (1, 4), (2, 4), (3, 4), (4, 4)]
 
-
-# Samples 3 random tuples from the CELLS which become the location of monster door and player
+'''
+Samples 3 random tuples from the CELLS which become the location of monster door and player
+'''
 def get_locations():
     return random.sample(CELLS, 3)
 
