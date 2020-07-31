@@ -22,14 +22,14 @@ of the player after making the move.
 '''
 def move_player(player, move):
     x, y = player
-    if move == "LEFT":
-        x -= 1
-    if move == "RIGHT":
-        x += 1
-    if move == "UP":
-        y -= 1
     if move == "DOWN":
         y += 1
+    elif move == "LEFT":
+        x -= 1
+    elif move == "RIGHT":
+        x += 1
+    elif move == "UP":
+        y -= 1
     return x, y
 
 '''
@@ -41,11 +41,11 @@ def get_moves(player):
     x, y = player
     if x == 0:
         moves.remove("LEFT") # removes "LEFT" from the list
-    if x == 4:
+    elif x == 4:
         moves.remove("RIGHT")
     if y == 0:
         moves.remove("UP")
-    if y == 4:
+    elif y == 4:
         moves.remove("DOWN")
     return moves
 
